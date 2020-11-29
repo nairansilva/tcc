@@ -1,0 +1,15 @@
+.titulo {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.outer {
+  width: 100%;
+}
+
+.inner {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  padding: 2%;
+}
