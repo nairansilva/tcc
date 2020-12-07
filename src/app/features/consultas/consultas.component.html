@@ -1,0 +1,32 @@
+<po-page-default p-title="Consultas" [p-actions]="actions">
+  <form [formGroup]="searchSchedule" class="searchInput">
+    <div class="po-row">
+      <po-input
+        class="po-md-4"
+        p-help="Pesquisar Consultas"
+        p-icon="po-icon-search"
+        formControlName="search"
+        name="search"
+        p-placeholder="Informe o nome do paciente ou médico da consulta"
+      >
+      </po-input>
+    </div>
+  </form>
+
+  <div *ngIf="agendasReservadas">
+    <app-mostrar-consulta
+      [agendasReservadas]="agendasReservadas"
+      [loadingTable]="loadingTable"
+      (consultaSelecionada)="consultaSelecionada($event)"
+    ></app-mostrar-consulta>
+  </div>
+
+  <app-show-more-button
+    [hasNext]="hasNext"
+    (showMore)="showMore()"
+  ></app-show-more-button>
+
+  <po-modal p-title="Teste" p-click-out="true" p-size="xl">
+    <app-dadosConsulta></app-dadosConsulta>
+  </po-modal>
+</po-page-default>

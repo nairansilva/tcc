@@ -1,0 +1,10 @@
+.rel-container {
+  position: relative;
+}
+
+.loading-button {
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 2% auto;
+}

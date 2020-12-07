@@ -1,21 +1,21 @@
-import { HomeComponent } from './home/home.component';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
+import { MenuComponent } from './menu/menu.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { PoUiModule } from '../shared/po-ui/po-ui.module';
+import { HomeComponent } from './home/home.component';
+import { RouterModule } from '@angular/router';
+import { MenuModule } from './menu/menu.module';
 
 
 @NgModule({
+  declarations: [ToolbarComponent, MenuComponent, HomeComponent],
   imports: [
     CommonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule
+    PoUiModule,
+    RouterModule,
+    MenuModule
   ],
-  declarations: [HeaderComponent, FooterComponent, HomeComponent],
-  exports: [HeaderComponent, FooterComponent, HomeComponent]
+  exports: [ToolbarComponent, MenuComponent]
 })
 export class CoreModule { }
