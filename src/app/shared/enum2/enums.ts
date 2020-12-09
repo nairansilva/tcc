@@ -7,3 +7,10 @@ export const EnumDiasDaSemana = [
   'sexta',
   'sábado'
 ]
+
+export const CodigoDocumento = [
+  'RG',
+  'CPF',
+  'CNH',
+  'RM'
+]

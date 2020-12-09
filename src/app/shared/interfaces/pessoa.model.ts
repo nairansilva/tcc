@@ -6,6 +6,8 @@ export interface Pessoa {
   tipo: 1;
   nome: string;
   idDocumento: number;
+  nomeDocumento: string;
+  numeroDocumento: string;
   dataNascimento: Date;
   email: string;
 }
