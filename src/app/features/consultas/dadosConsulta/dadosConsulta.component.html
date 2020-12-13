@@ -7,17 +7,31 @@
     <div>
       <po-divider p-label="Dados do Paciente"></po-divider>
       <div class="po-md-12">
-        <po-combo
-          class="po-md-6"
-          p-placeholder="Informe o nome, documento ou código do paciente"
-          formControlName="idPaciente"
-          name="idPaciente"
-          p-label="Paciente"
-          (p-change)="selecionaCliente($event)"
-          p-filter-mode = "contains"
-          [p-options]="pacientes"
-        >
-        </po-combo>
+        <div *ngIf="tipoOperacao !== 1">
+          <po-combo
+            class="po-md-6"
+            p-placeholder="Informe o nome, documento ou código do paciente"
+            formControlName="idPaciente"
+            name="idPaciente"
+            p-label="Paciente"
+            (p-change)="selecionaPaciente($event)"
+            p-filter-mode="contains"
+            [p-options]="pacientes"
+          >
+          </po-combo>
+        </div>
+        <div *ngIf="tipoOperacao === 1">
+          <po-input
+            class="po-md-6"
+            p-placeholder="Informe o nome, documento ou código do paciente"
+            formControlName="idPaciente"
+            p-readonly="true"
+            name="idPaciente"
+            p-label="Paciente"
+            p-filter-mode="contains"
+          >
+          </po-input>
+        </div>
         <po-input
           class="po-md-6"
           formControlName="nomePaciente"
@@ -59,25 +73,49 @@
       <po-divider p-label="Dados do Atendimento"></po-divider>
 
       <div class="po-md-12">
-        <po-combo
-          class="po-md-6"
-          p-placeholder="Informe o procedimento desejado"
-          formControlName="procedimento"
-          name="procedimento"
-          p-label="Procedimento"
-          [p-options]=""
-        >
-        </po-combo>
+        <div *ngIf="tipoOperacao !== 1">
+          <po-combo
+            class="po-md-6"
+            p-placeholder="Informe o procedimento desejado"
+            formControlName="procedimento"
+            name="procedimento"
+            p-label="Procedimento"
+            (p-change)="selecionaProcedimento($event)"
+            [p-options]="procedimentos"
+          >
+          </po-combo>
 
-        <po-combo
-          class="po-md-6"
-          p-placeholder="Informe o nome, documento ou código do Médico"
-          formControlName="idFuncionario"
-          name="idFuncionario"
-          p-label="Médico"
-          [p-options]=""
-        >
-        </po-combo>
+          <po-combo
+            class="po-md-6"
+            p-placeholder="Informe o nome, documento ou código do Médico"
+            formControlName="idFuncionario"
+            name="idFuncionario"
+            p-label="Médico"
+            (p-change)="selecionaFuncionario($event)"
+            [p-disabled]="habilitaMedico"
+            [p-options]="medicosCombo"
+          >
+          </po-combo>
+        </div>
+        <div *ngIf="tipoOperacao === 1">
+          <po-input
+            class="po-md-6"
+            p-placeholder="Informe o procedimento desejado"
+            formControlName="procedimento"
+            name="procedimento"
+            p-label="Procedimento"
+          >
+          </po-input>
+
+          <po-input
+            class="po-md-6"
+            p-placeholder="Informe o nome, documento ou código do Médico"
+            formControlName="idFuncionario"
+            name="idFuncionario"
+            p-label="Médico"
+          >
+          </po-input>
+        </div>
       </div>
       <div class="po-md-12">
         <po-input
@@ -118,25 +156,56 @@
         </po-input>
       </div>
       <div class="po-md-12">
-        <po-combo
-          class="po-md-6"
-          p-placeholder="Selecione uma data disponível"
-          formControlName="dataAtendimento"
-          name="dataAtendimento"
-          p-label="Data Atendimento"
-          [p-options]=""
-        >
-        </po-combo>
+        <div *ngIf="tipoOperacao !== 1">
+          <po-combo
+            class="po-md-6"
+            p-placeholder="Selecione uma data disponível"
+            formControlName="dataAtendimento"
+            name="dataAtendimento"
+            p-label="Data Atendimento"
+            [p-options]="datasCombo"
+          >
+          </po-combo>
 
-        <po-combo
-          class="po-md-6"
-          p-placeholder="Selecione um horário disponível"
-          formControlName="horaAtendimento"
-          name="horaAtendimento"
-          p-label="Hora Atendimento"
-          [p-options]=""
-        >
-        </po-combo>
+          <po-combo
+            class="po-md-6"
+            p-placeholder="Selecione um horário disponível"
+            formControlName="horaAtendimento"
+            name="horaAtendimento"
+            p-label="Hora Atendimento"
+            [p-options]="horasCombo"
+          >
+          </po-combo>
+        </div>
+        <div *ngIf="tipoOperacao === 1">
+          <po-input
+            class="po-md-6"
+            p-placeholder="Selecione uma data disponível"
+            p-readonly="true"
+            formControlName="dataAtendimento"
+            name="dataAtendimento"
+            p-label="Data Atendimento"
+          >
+          </po-input>
+
+          <po-input
+            class="po-md-6"
+            p-placeholder="Selecione um horário disponível"
+            p-readonly="true"
+            formControlName="horaAtendimento"
+            name="horaAtendimento"
+            p-label="Hora Atendimento"
+          >
+          </po-input>
+        </div>
+          <po-input
+            class="po-md-12"
+            formControlName="descricaoAtendimento"
+            p-readonly="true"
+            name="descricaoAtendimento"
+            p-label="Descrição"
+          >
+          </po-input>
       </div>
     </div>
   </form>

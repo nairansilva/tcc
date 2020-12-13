@@ -10,4 +10,5 @@ export interface Pessoa {
   numeroDocumento: string;
   dataNascimento: Date;
   email: string;
+  idFuncionario?: number | string
 }

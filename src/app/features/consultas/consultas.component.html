@@ -26,7 +26,7 @@
     (showMore)="showMore()"
   ></app-show-more-button>
 
-  <po-modal p-title="Teste" p-click-out="true" p-size="xl">
-    <app-dadosConsulta></app-dadosConsulta>
+  <po-modal [p-title]="descricaoAcao" p-click-out="true">
+    <app-dadosConsulta [opcaoModal]="opcaoModal"></app-dadosConsulta>
   </po-modal>
 </po-page-default>

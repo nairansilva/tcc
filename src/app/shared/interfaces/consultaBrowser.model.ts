@@ -1,7 +1,8 @@
 export interface ConsultaBrowser {
   id: string;
   diaDaSemana: number | string;
-  dataHoraAtendimento: Date;
+  dataAtendimento: Date;
+  horaAtendimento: string;
   dataHoraEntrada: Date;
   dataHoraSaida: Date;
   disponivel: boolean;
@@ -10,6 +11,8 @@ export interface ConsultaBrowser {
   idFuncionario: number;
   nomePaciente: string;
   nomeFuncionario: string;
+  procedimento: string;
   status: number;
   dadosPaciente: Object;
+  dadosFuncionario: Object;
 }

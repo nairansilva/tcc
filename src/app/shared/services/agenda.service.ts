@@ -45,6 +45,7 @@ export class AgendaService {
         mergeMap(agenda => {
           return this.funcionariosService.getFuncionarioId(agenda.idFuncionario).pipe(
             map(funcionario => {
+              agenda.dadosFuncionario = funcionario;
               agenda.nomeFuncionario = funcionario.nome;
               return agenda;
             })

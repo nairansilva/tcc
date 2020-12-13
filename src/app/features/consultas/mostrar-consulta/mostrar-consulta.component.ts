@@ -25,24 +25,24 @@ export class MostrarConsultaComponent implements OnInit {
   getActions(): Array<PoTableAction> {
     return [
       {
-        action: this.openQuestionnaire.bind(this),
+        action: this.openQuestionnaire.bind(this, 1),
         icon: 'po-icon-eye',
         label: 'Visualizar'
       },
       {
-        action: () => alert('editar'),
+        action: this.openQuestionnaire.bind(this, 2),
         icon: 'po-icon-edit',
         label: 'Editar',
       },
       {
-        action: () => alert('Excluir'),
+        action: this.openQuestionnaire.bind(this, 3),
         icon: 'po-icon-delete',
         label: 'Deletar'
       }
     ];
   }
-  openQuestionnaire(itemSelecionado): void {
-    this.consultaSelecionada.emit({ tipo: 1, item: itemSelecionado });
+  openQuestionnaire(tipo: number, itemSelecionado): void {
+    this.consultaSelecionada.emit({ item: itemSelecionado, tipo: tipo });
   }
 
   getColumns(): Array<PoTableColumn> {
@@ -60,7 +60,8 @@ export class MostrarConsultaComponent implements OnInit {
       },
       { property: 'idPaciente', label: 'Paciente', type: 'number' },
       { property: 'nomePaciente', label: 'Nome Paciente', type: 'string' },
-      { property: 'dataHoraAtendimento', label: 'Data', type: 'dateTime' },
+      { property: 'dataAtendimento', label: 'Data', type: 'date' },
+      { property: 'horaAtendimento', label: 'Hora', type: 'string' },
       { property: 'descricao', label: 'Descrição', type: 'string' },
       { property: 'idFuncionario', label: 'Funcionário', type: 'number' },
       { property: 'nomeFuncionario', label: 'Nome Funcionário', type: 'string' },

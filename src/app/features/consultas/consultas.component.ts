@@ -28,10 +28,12 @@ export class ConsultasComponent implements OnInit, OnDestroy {
   public hasNext = false;
   public loadingTable = true;
   public actions: Array<PoPageAction>;
+  public opcaoModal;
+  public descricaoAcao = '';
 
   constructor(private formBuilder: FormBuilder,
-              private agenda: AgendaService,
-              private poNotification: PoNotificationService
+    private agenda: AgendaService,
+    private poNotification: PoNotificationService
   ) { }
 
   @ViewChild(PoModalComponent, { static: true }) poModal: PoModalComponent;
@@ -46,7 +48,7 @@ export class ConsultasComponent implements OnInit, OnDestroy {
     return [
       {
         label: 'Agendar',
-        action: () => alert('teste'),
+        action: this.incluirConsulta.bind(this),
         icon: 'po-icon-plus-circle',
       },
     ];
@@ -98,7 +100,6 @@ export class ConsultasComponent implements OnInit, OnDestroy {
   }
 
   showMore(): void {
-    console.log('teste')
     this.getItems(this.page + 1);
   }
 
@@ -111,12 +112,39 @@ export class ConsultasComponent implements OnInit, OnDestroy {
     }
   }
 
-  consultaSelecionada(event): void {
-    console.log(event);
+  incluirConsulta():void{
+    this.opcaoModal = {item:{}, tipo:4};
+    this.defineNomeAcao(4);
     this.poModal.open();
   }
 
-  ngOnDestroy(): void {
-    this.agendasSubscription.unsubscribe();
+  consultaSelecionada(event): void {
+    this.defineNomeAcao(event.tipo);
+    this.opcaoModal = event;
+    this.poModal.open();
   }
+
+  defineNomeAcao(tipo): void {
+    switch(tipo) {
+      case 1: {
+         this.descricaoAcao = 'Visualizar Consulta'
+         break;
+      }
+      case 2: {
+        this.descricaoAcao = 'Alterar Consulta'
+         break;
+      }
+      case 4: {
+        this.descricaoAcao = 'Incluir Consulta'
+         break;
+      }
+      default: {
+        this.descricaoAcao = 'Excluir Consulta'
+         break;
+      }
+   }
+}
+ngOnDestroy(): void {
+  this.agendasSubscription.unsubscribe();
+}
 }
