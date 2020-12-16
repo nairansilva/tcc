@@ -1,7 +1,7 @@
 export interface ConsultaBrowser {
   id: string;
   diaDaSemana: number | string;
-  dataAtendimento: Date;
+  dataAtendimento: string;
   horaAtendimento: string;
   dataHoraEntrada: Date;
   dataHoraSaida: Date;

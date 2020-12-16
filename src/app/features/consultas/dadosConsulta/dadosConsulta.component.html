@@ -163,7 +163,8 @@
             formControlName="dataAtendimento"
             name="dataAtendimento"
             p-label="Data Atendimento"
-            [p-options]="datasCombo"
+            (p-change)="selecionaData($event)"
+            [p-options]="datasDisponiveisCombo"
           >
           </po-combo>
 
@@ -173,7 +174,7 @@
             formControlName="horaAtendimento"
             name="horaAtendimento"
             p-label="Hora Atendimento"
-            [p-options]="horasCombo"
+            [p-options]="horasDisponiveisCombo"
           >
           </po-combo>
         </div>
@@ -198,15 +199,17 @@
           >
           </po-input>
         </div>
-          <po-input
-            class="po-md-12"
-            formControlName="descricaoAtendimento"
-            p-readonly="true"
-            name="descricaoAtendimento"
-            p-label="Descrição"
-          >
-          </po-input>
+        <po-input
+          class="po-md-12"
+          formControlName="descricaoAtendimento"
+          p-readonly="true"
+          name="descricaoAtendimento"
+          p-label="Descrição"
+        >
+        </po-input>
       </div>
     </div>
   </form>
 </po-container>
+
+

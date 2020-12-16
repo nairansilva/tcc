@@ -1,12 +1,14 @@
+import { ModalCrudComponent } from './../../../shared/componentes/modal-crud/modal-crud.component';
+import { AgendaService } from './../../../shared/services/agenda.service';
 import { FuncionariosService } from './../../../shared/services/funcionarios.service';
 import { ProcedimentosService } from './../../../shared/services/procedimentos.service';
 import { AcoesConsulta } from './../../../shared/interfaces/acoesConsulta.model';
 import { Pessoa } from './../../../shared/interfaces/pessoa.model';
 import { PacientesService } from './../../../shared/services/pacientes.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PoComboOption } from '@po-ui/ng-components';
-import { finalize } from 'rxjs/operators';
+import { debounceTime, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dadosConsulta',
@@ -14,8 +16,10 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./dadosConsulta.component.css']
 })
 export class DadosConsultaComponent implements OnInit {
+  private idFuncionario;
   public tipoOperacao;
   public habilitaMedico = true;
+  @Output() formularioPreenchido = new EventEmitter();
   @Input() set opcaoModal(opcao: AcoesConsulta) {
     if (opcao) {
       this.tipoOperacao = opcao.tipo;
@@ -27,10 +31,10 @@ export class DadosConsultaComponent implements OnInit {
     }
   };
   public pacientes: Array<PoComboOption>;
-  public datasCombo: Array<PoComboOption>;
-  public horasCombo: Array<PoComboOption>;
   public procedimentos: Array<PoComboOption>;
   public medicosCombo: Array<PoComboOption>;
+  public datasDisponiveisCombo: Array<PoComboOption>;
+  public horasDisponiveisCombo: Array<PoComboOption>;
   public carregando = false;
   public formAgendarConsulta: FormGroup;
   public bodyFilter = {
@@ -53,12 +57,16 @@ export class DadosConsultaComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private pacientesService: PacientesService,
     private procedimentosService: ProcedimentosService,
+    private agendaService: AgendaService,
     private funcionariosService: FuncionariosService) { }
+
+    @ViewChild(ModalCrudComponent, { static: true }) modalCrud: ModalCrudComponent;
 
   ngOnInit(): void {
     this.getPacientes();
     this.buildForm();
     this.getProcedimentos();
+    this.atualizaForm()
   }
 
   getPacientes(): any {
@@ -131,6 +139,7 @@ export class DadosConsultaComponent implements OnInit {
   selecionaProcedimento(procedimentoCombo): void {
     if (procedimentoCombo) {
       this.habilitaMedico = false;
+      this.limpaFuncionario();
       this.procedimentosService.getFuncionarioProcedimento(procedimentoCombo).subscribe(funcionarioXProcedimento => {
         this.medicosCombo = funcionarioXProcedimento.map(medicos => {
           return { label: `${medicos.id} - ${medicos.nome}`, value: medicos.id }
@@ -144,9 +153,13 @@ export class DadosConsultaComponent implements OnInit {
 
   selecionaFuncionario(idFuncionario): void {
     if (idFuncionario) {
+      this.idFuncionario = idFuncionario
       this.carregando = false;
-      this.funcionariosService.getFuncionarioId(idFuncionario).subscribe(funcionario => {
+      this.limpaDataEHoraAtendimento();
+      this.funcionariosService.getFuncionarioId(idFuncionario).pipe(
+      ).subscribe(funcionario => {
         this.montaDadosFuncionario(funcionario);
+        this.carregaDatasDisponiveis(funcionario.id)
         this.carregando = true;
       });
     }
@@ -160,6 +173,22 @@ export class DadosConsultaComponent implements OnInit {
       dataNascimentoFuncionario: dadosFuncionario.dataNascimento,
       documentoFuncionario: dadosFuncionario.documentos[0].documento,
       emailFuncionario: dadosFuncionario.email,
+    })
+  }
+
+  carregaDatasDisponiveis(idFuncionario):void {
+    this.agendaService.getDataAtendimento(idFuncionario).subscribe( datasDisponiveis => {
+      this.datasDisponiveisCombo = datasDisponiveis.map(data => {
+        return { label: `${data.dataAtendimento}`, value: data.dataAtendimento }
+      });
+    })
+  }
+
+  selecionaData(dataSelecionada): void {
+    this.agendaService.getHoraAtendimento(this.idFuncionario,dataSelecionada).subscribe( horasDisponiveis => {
+      this.horasDisponiveisCombo = horasDisponiveis.map(hora => {
+        return { label: `${hora.horaAtendimento}`, value: hora.horaAtendimento }
+      });
     })
   }
 
@@ -199,5 +228,35 @@ export class DadosConsultaComponent implements OnInit {
       emailFuncionario: '',
       descricaoAtendimento: ''
     })
+  }
+
+  limpaDataEHoraAtendimento(): void {
+    this.formAgendarConsulta.patchValue({
+      dataAtendimento: '',
+      horaAtendimento: ''
+    })
+  }
+
+  limpaFuncionario(): void {
+    this.formAgendarConsulta.patchValue({
+      dataAtendimento: '',
+      horaAtendimento: '',
+      idFuncionario: '',
+      nomeFuncionario: '',
+      dataNascimentoFuncionario: '',
+      documentoFuncionario: '',
+      emailFuncionario: ''
+    })
+  }
+
+  atualizaForm():void{
+    this.formAgendarConsulta.valueChanges
+    .pipe(debounceTime(500))
+    .subscribe((val) => {
+      this.formularioPreenchido.emit(this.formAgendarConsulta.value);
+    });
+  }
+  abrirModal():void{
+     this.modalCrud.openRightMenu();
   }
 }

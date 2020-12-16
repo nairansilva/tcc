@@ -26,7 +26,11 @@
     (showMore)="showMore()"
   ></app-show-more-button>
 
-  <po-modal [p-title]="descricaoAcao" p-click-out="true">
-    <app-dadosConsulta [opcaoModal]="opcaoModal"></app-dadosConsulta>
+  <app-modal-crud>
+    <app-dadosConsulta></app-dadosConsulta>
+  </app-modal-crud>
+
+  <po-modal [p-title]="descricaoAcao" p-click-out="true" [p-primary-action]="confirm">
+    <app-dadosConsulta [opcaoModal]="opcaoModal" (formularioPreenchido)="recebeFormulario($event)"></app-dadosConsulta>
   </po-modal>
 </po-page-default>

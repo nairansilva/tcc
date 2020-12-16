@@ -8,7 +8,8 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, finalize } from 'rxjs/operators';
-import { PoModalComponent, PoNotificationService, PoPageAction } from '@po-ui/ng-components';
+import { PoModalAction, PoModalComponent, PoNotificationService, PoPageAction } from '@po-ui/ng-components';
+import { ModalCrudComponent } from 'src/app/shared/componentes/modal-crud/modal-crud.component';
 
 @Component({
   selector: 'app-consultas',
@@ -16,6 +17,7 @@ import { PoModalComponent, PoNotificationService, PoPageAction } from '@po-ui/ng
   styleUrls: ['./consultas.component.css']
 })
 export class ConsultasComponent implements OnInit, OnDestroy {
+  public formulario;
   public searchField = new FormControl();
   public searchSchedule: FormGroup = this.formBuilder.group({
     search: [''],
@@ -37,6 +39,7 @@ export class ConsultasComponent implements OnInit, OnDestroy {
   ) { }
 
   @ViewChild(PoModalComponent, { static: true }) poModal: PoModalComponent;
+  @ViewChild(ModalCrudComponent, { static: true }) modalCrud: ModalCrudComponent;
 
   ngOnInit(): void {
     this.changeInput();
@@ -112,9 +115,10 @@ export class ConsultasComponent implements OnInit, OnDestroy {
     }
   }
 
-  incluirConsulta():void{
-    this.opcaoModal = {item:{}, tipo:4};
+  incluirConsulta(): void {
+    this.opcaoModal = { item: {}, tipo: 4 };
     this.defineNomeAcao(4);
+    //this.abrirModal()
     this.poModal.open();
   }
 
@@ -125,26 +129,43 @@ export class ConsultasComponent implements OnInit, OnDestroy {
   }
 
   defineNomeAcao(tipo): void {
-    switch(tipo) {
+    switch (tipo) {
       case 1: {
-         this.descricaoAcao = 'Visualizar Consulta'
-         break;
+        this.descricaoAcao = 'Visualizar Consulta'
+        break;
       }
       case 2: {
         this.descricaoAcao = 'Alterar Consulta'
-         break;
+        break;
       }
       case 4: {
         this.descricaoAcao = 'Incluir Consulta'
-         break;
+        break;
       }
       default: {
         this.descricaoAcao = 'Excluir Consulta'
-         break;
+        break;
       }
-   }
-}
-ngOnDestroy(): void {
-  this.agendasSubscription.unsubscribe();
-}
+    }
+  }
+
+  abrirModal(): void {
+    this.modalCrud.openRightMenu();
+  }
+
+  recebeFormulario(form):void {
+    this.formulario = form;
+  }
+
+  confirm: PoModalAction = {
+    action: () => {
+      console.log('recebi formulario', this.formulario)
+      alert('teste');
+    },
+    label: 'Confirmar'
+  };
+
+  ngOnDestroy(): void {
+    this.agendasSubscription.unsubscribe();
+  }
 }

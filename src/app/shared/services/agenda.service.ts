@@ -55,21 +55,17 @@ export class AgendaService {
       );
   }
 
+  getDataAtendimento(ìdFuncionario = ''): Observable<ConsultaBrowser[]> {
+    const filter = `?disponivel=true&idFuncionario=${ìdFuncionario}`
+    return this.http.get<ConsultaBrowser[]>(`${this.URL}${filter}`);
+  }
 
-  // fullChart(filter =''): Observable<any> {
-  //   const order = filter.split(',');
-  //   return this.getCharts(`EQ_status=1&EQ_id=[${filter}]`)
-  //   .pipe(
-  //     switchMap((charts) => charts),
-  //       mergeMap((chart) => {
-  //       Object.assign(chart, {order: order.findIndex (indexOrder => indexOrder === chart["id"])});
-  //       return this.getTypeChartbyId(chart["typechartId"])
-  //         .pipe(
-  //           map((typeChart) => Object.assign(typeChart, chart))
-  //           );
-  //     }),
-  //     toArray()
-  //   )
-  // }
+  getHoraAtendimento(ìdFuncionario = '', dataAtendimento = ''): Observable<ConsultaBrowser[]> {
+    const filter = `?disponivel=true&idFuncionario=${ìdFuncionario}&dataAtendimento=${dataAtendimento}`
+    return this.http.get<ConsultaBrowser[]>(`${this.URL}${filter}`);
+  }
 
+  patchAgenda(id='', formulario):Observable<any>{
+    return this.http.patch(`${this.URL}${id}`, formulario);
+  }
 }

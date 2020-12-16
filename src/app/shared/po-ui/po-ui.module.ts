@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PoModule } from '@po-ui/ng-components';
+import { ModalCrudComponent } from '../componentes/modal-crud/modal-crud.component';
 
 
 
 @NgModule({
-  declarations: [ShowMoreButtonComponent],
+  declarations: [ShowMoreButtonComponent, ModalCrudComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -18,7 +19,8 @@ import { PoModule } from '@po-ui/ng-components';
     FormsModule,
     ReactiveFormsModule,
     PoModule,
-    ShowMoreButtonComponent
+    ShowMoreButtonComponent,
+    ModalCrudComponent
   ]
 })
 export class PoUiModule { }
