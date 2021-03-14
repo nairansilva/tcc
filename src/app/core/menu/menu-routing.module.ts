@@ -20,6 +20,13 @@ const routes: Routes = [
             (m) => m.ConsultasModule
           ),
       },
+      {
+        path: 'atendimentos',
+        loadChildren: () =>
+          import('../../features/atendimento/atendimento.module').then(
+            (m) => m.AtendimentoModule
+          ),
+      }
     ],
   },
 ];

@@ -1,0 +1,34 @@
+<po-page-default p-title="Atendimentos" [p-actions]="actions">
+  <form [formGroup]="searchSchedule" class="searchInput">
+    <div class="po-row">
+      <po-input
+        class="po-md-4"
+        p-help="Pesquisar Atendimento"
+        p-icon="po-icon-search"
+        formControlName="search"
+        name="search"
+        p-placeholder="Informe o nome do paciente ou médico da consulta"
+      >
+      </po-input>
+    </div>
+  </form>
+
+  <po-table
+    p-sort="true"
+    [p-columns]="columns"
+    [p-items]="atendimentos"
+    [p-striped]="true"
+    [p-loading]="loadingTable"
+    [p-actions]="actionsTable"
+  >
+  </po-table>
+
+  <po-modal p-title="Atendimento" p-click-out="true" >
+    <app-dadosAtendimento></app-dadosAtendimento>
+  </po-modal>
+
+  <app-show-more-button
+    [hasNext]="true"
+    (showMore)="showMore()"
+  ></app-show-more-button>
+</po-page-default>

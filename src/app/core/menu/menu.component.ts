@@ -34,12 +34,12 @@ export class MenuComponent implements OnInit {
             }, shortLabel: 'Agendar', icon: 'po-icon-clock'
           },
           {
-            label: 'Minhar Consultas', action: () => {
-              this.router.navigate(['consultas']);
-            }, shortLabel: 'Agendar', icon: 'po-icon-clock'
+            label: 'Atendimentos', action: () => {
+              this.router.navigate(['atendimentos']);
+            }, shortLabel: 'Atendimento', icon: 'po-icon-clock'
           },
           {
-            label: 'Meus Atendimentos', action: () => {
+            label: 'Prontuários', action: () => {
               this.router.navigate(['consultas']);
             }, shortLabel: 'Agendar', icon: 'po-icon-clock'
           }

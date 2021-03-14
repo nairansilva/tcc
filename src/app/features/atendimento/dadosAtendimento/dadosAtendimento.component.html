@@ -1,0 +1,45 @@
+<po-container p-no-border="true" p-no-shadow="true">
+  <form [formGroup]="formAgendarConsulta">
+    <div>
+      <po-input formControlName="paciente" name="paciente" p-label="Paciente" p-readonly="true">
+      </po-input>
+      <po-input formControlName="medico" name="medico" p-label="Médico" p-readonly="true">
+      </po-input>
+      <po-input
+        formControlName="procedimento"
+        p-readonly="true"
+        name="procedimento"
+        p-label="Procedimento"
+      >
+      </po-input>
+      <po-radio-group
+        formControlName="retorno"
+        name="retorno"
+        p-label="Necessita Retorno"
+        [p-options]="[
+          { label: 'Sim', value: 1 },
+          { label: 'Não', value: 2 }
+        ]"
+      >
+      </po-radio-group>
+      <po-radio-group
+        formControlName="internacao"
+        name="internação"
+        p-label="Necessita Internação"
+        [p-options]="[
+          { label: 'Sim', value: 1 },
+          { label: 'Não', value: 2 }
+        ]"
+      >
+      </po-radio-group>
+      <po-input
+        formControlName="medicamentos"
+        name="medicamentos"
+        p-label="Medicamentos"
+      >
+      </po-input>
+      <po-input formControlName="observacao" name="obs" p-label="Observação">
+      </po-input>
+    </div>
+  </form>
+</po-container>
