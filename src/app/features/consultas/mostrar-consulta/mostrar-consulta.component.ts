@@ -38,6 +38,11 @@ export class MostrarConsultaComponent implements OnInit {
         action: this.openQuestionnaire.bind(this, 3),
         icon: 'po-icon-delete',
         label: 'Deletar'
+      },
+      {
+        action: this.openQuestionnaire.bind(this, 3),
+        icon: 'po-icon-mail',
+        label: 'E-mail'
       }
     ];
   }

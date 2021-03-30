@@ -2,22 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-dadosAtendimento',
-  templateUrl: './dadosAtendimento.component.html',
-  styleUrls: ['./dadosAtendimento.component.scss']
+  selector: 'app-prontuario',
+  templateUrl: './prontuario.component.html',
+  styleUrls: ['./prontuario.component.css']
 })
-export class DadosAtendimentoComponent implements OnInit {
+export class ProntuarioComponent implements OnInit {
+
   public formAgendarConsulta: FormGroup;
   constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
-    this.buildForm();
+  ngOnInit(): void {
+    this.buildForm()
   }
 
   buildForm(): void {
     this.formAgendarConsulta = this.formBuilder.group({
       codPaciente: ["000001"],
-      nomePaciente:["Padro Pedreira"],
+      nomePaciente:["João da Silva"],
       codMedico: ["000555"],
       nomeMedico: ["Sandra Sabonette"],
       procedimento: ["Oftalmologista"],

@@ -6,6 +6,7 @@ import { PoUiModule } from '../shared/po-ui/po-ui.module';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { MenuModule } from './menu/menu.module';
+import { ProntuarioModule } from '../features/prontuario/prontuario.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { MenuModule } from './menu/menu.module';
     CommonModule,
     PoUiModule,
     RouterModule,
-    MenuModule
+    MenuModule,
+    ProntuarioModule
   ],
   exports: [ToolbarComponent, MenuComponent]
 })

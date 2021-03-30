@@ -1,18 +1,53 @@
 <po-container p-no-border="true" p-no-shadow="true">
   <form [formGroup]="formAgendarConsulta">
     <div>
-      <po-input formControlName="paciente" name="paciente" p-label="Paciente" p-readonly="true">
-      </po-input>
-      <po-input formControlName="medico" name="medico" p-label="Médico" p-readonly="true">
+      <po-divider p-label="Paciente"> </po-divider>
+      <po-input
+        class="po-md-6"
+        formControlName="codPaciente"
+        name="codPaciente"
+        p-label="Código Paciente"
+        p-readonly="true"
+      >
       </po-input>
       <po-input
+        class="po-md-6"
+        formControlName="nomePaciente"
+        name="NomePaciente"
+        p-label="Nome Paciente"
+        p-readonly="true"
+      >
+      </po-input>
+
+      <po-divider p-label="Médico"> </po-divider>
+      <po-input
+        class="po-md-6"
+        formControlName="codMedico"
+        name="codMedico"
+        p-label="Código Médico"
+        p-readonly="true"
+      >
+      </po-input>
+      <po-input
+        class="po-md-6"
+        formControlName="nomeMedico"
+        name="nomeMedico"
+        p-label="Nome Médico"
+        p-readonly="true"
+      >
+      </po-input>
+      <po-divider p-label="Procedimentos"> </po-divider>
+      <po-input
+        class="po-md-12"
         formControlName="procedimento"
         p-readonly="true"
         name="procedimento"
         p-label="Procedimento"
       >
       </po-input>
+      <po-divider p-label="Informações Adicionais"> </po-divider>
       <po-radio-group
+        class="po-md-6"
         formControlName="retorno"
         name="retorno"
         p-label="Necessita Retorno"
@@ -23,6 +58,7 @@
       >
       </po-radio-group>
       <po-radio-group
+        class="po-md-6"
         formControlName="internacao"
         name="internação"
         p-label="Necessita Internação"
@@ -33,12 +69,18 @@
       >
       </po-radio-group>
       <po-input
+        class="po-md-12"
         formControlName="medicamentos"
         name="medicamentos"
         p-label="Medicamentos"
       >
       </po-input>
-      <po-input formControlName="observacao" name="obs" p-label="Observação">
+      <po-input
+        class="po-md-12"
+        formControlName="observacao"
+        name="obs"
+        p-label="Observação"
+      >
       </po-input>
     </div>
   </form>

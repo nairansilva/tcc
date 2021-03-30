@@ -1,0 +1,46 @@
+<po-page-default p-title="Prontuários">
+  <po-container
+    class="po-offset-lg-3 po-offset-xl-3 po-md-6"
+    p-no-border="true"
+    p-no-shadow="true"
+  >
+    <!-- class="po-offset-lg-4 po-offset-xl-4 po-xl-4 po-lg-4 po-md-7 po-sm-12" -->
+    <form [formGroup]="formAgendarConsulta">
+      <div>
+        <po-divider p-label="Impressão de Prontuário por Paciente">
+        </po-divider>
+        <po-input
+          class="po-md-12"
+          formControlName="nomePaciente"
+          name="NomePaciente"
+          p-label="Paciente"
+          p-placeholder="Informe o nome, CPF ou código do paciente"
+          p-readonly="true"
+        >
+        </po-input>
+
+        <po-datepicker
+          class="po-md-12"
+          name="datepicker"
+          p-label="Data Inicial"
+        >
+        </po-datepicker>
+        <po-datepicker class="po-md-12" name="datepicker" p-label="Data Final">
+        </po-datepicker>
+      </div>
+
+      <div class="po-row">
+        <po-button
+          class="po-offset-lg-3 po-offset-xl-3 po-md-3"
+          p-label="Imprimir"
+        >
+        </po-button>
+        <po-button
+          class="po-md-3"
+          p-label="E-mail"
+        >
+        </po-button>
+      </div>
+    </form>
+  </po-container>
+</po-page-default>

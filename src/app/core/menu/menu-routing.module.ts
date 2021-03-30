@@ -26,6 +26,13 @@ const routes: Routes = [
           import('../../features/atendimento/atendimento.module').then(
             (m) => m.AtendimentoModule
           ),
+      },
+      {
+        path: 'prontuario',
+        loadChildren: () =>
+          import('../../features/prontuario/prontuario.module').then(
+            (m) => m.ProntuarioModule
+          ),
       }
     ],
   },

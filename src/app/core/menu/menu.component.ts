@@ -25,29 +25,19 @@ export class MenuComponent implements OnInit {
         shortLabel: 'Home',
       },
       {
-        label: 'Consultas', link: 'notifications', icon: 'po-icon-calendar',
-        shortLabel: 'Consultas',
-        subItems: [
-          {
-            label: 'Agendar Consultas', action: () => {
-              this.router.navigate(['consultas']);
-            }, shortLabel: 'Agendar', icon: 'po-icon-clock'
-          },
-          {
-            label: 'Atendimentos', action: () => {
-              this.router.navigate(['atendimentos']);
-            }, shortLabel: 'Atendimento', icon: 'po-icon-clock'
-          },
-          {
-            label: 'Prontuários', action: () => {
-              this.router.navigate(['consultas']);
-            }, shortLabel: 'Agendar', icon: 'po-icon-clock'
-          }
-        ]
+        label: 'Agendar Consultas', action: () => {
+          this.router.navigate(['consultas']);
+        }, shortLabel: 'Agendar', icon: 'po-icon-clock'
       },
       {
-        label: 'Prontuários', link: 'customers', icon: 'po-icon-clipboard',
-        shortLabel: 'Prontuários',
+        label: 'Atendimentos', action: () => {
+          this.router.navigate(['atendimentos']);
+        }, shortLabel: 'Atendimento', icon: 'po-icon-target'
+      },
+      {
+        label: 'Prontuários', action: () => {
+          this.router.navigate(['prontuario']);
+        }, shortLabel: 'Prontuários', icon: 'po-icon-clipboard'
       },
     ];
   }

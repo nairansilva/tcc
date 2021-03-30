@@ -47,18 +47,13 @@ export class AtendimentoComponent implements OnInit {
     return [
       {
         action: () => this.poModal.open(),
-        icon: 'po-icon-eye',
-        label: 'Visualizar'
+        icon: 'po-icon-injector',
+        label: 'Confirmar'
       },
       {
         action: () => alert(''),
-        icon: 'po-icon-edit',
-        label: 'Editar',
-      },
-      {
-        action: () => alert(''),
-        icon: 'po-icon-delete',
-        label: 'Deletar'
+        icon: 'po-icon-close',
+        label: 'Cancelar',
       }
     ];
   }

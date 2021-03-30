@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PoModule } from '@po-ui/ng-components';
 import { ModalCrudComponent } from '../componentes/modal-crud/modal-crud.component';
+import { PoPageDynamicSearchModule } from '@po-ui/ng-templates';
+
 
 
 
@@ -14,6 +16,7 @@ import { ModalCrudComponent } from '../componentes/modal-crud/modal-crud.compone
     FormsModule,
     PoModule,
     ReactiveFormsModule,
+    PoPageDynamicSearchModule
   ],
   exports: [
     FormsModule,
